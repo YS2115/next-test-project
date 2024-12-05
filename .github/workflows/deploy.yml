@@ -26,4 +26,4 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v2'
 
     - name: 'Get Secret'
-      run: gcloud secrets versions access latest --secret="my-secret" # シークレットを読み取り。
+      run: gcloud secrets versions access latest --secret="my-secret" --project=${{ env.PROJECT_ID }} # シークレットを読み取り。
