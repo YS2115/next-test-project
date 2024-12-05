@@ -28,7 +28,7 @@ jobs:
     - name: 'Get Secret'
       run: gcloud secrets versions access latest --secret="my-secret" --project="${{ vars.PROJECT_ID }}" # シークレットを読み取り。
 
-    - name: 'Get Secret'
+    - name: 'Get Secret!!'
       run: |
         SECRET_VALUE=$(gcloud secrets versions access latest \
           --secret="my-secret" \
