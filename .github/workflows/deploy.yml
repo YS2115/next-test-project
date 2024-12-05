@@ -19,18 +19,18 @@ jobs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
       with:
-        project_id: '${{ env.PROJECT_ID }}'
+        project_id: '${{ vars.PROJECT_ID }}'
         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
 
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
 
     - name: 'Get Secret'
-      run: gcloud secrets versions access latest --secret="my-secret" --project="${{ env.PROJECT_ID }}" # シークレットを読み取り。
+      run: gcloud secrets versions access latest --secret="my-secret" --project="${{ vars.PROJECT_ID }}" # シークレットを読み取り。
 
     - name: 'Get Secret'
       run: |
         SECRET_VALUE=$(gcloud secrets versions access latest \
           --secret="my-secret" \
-          --project="${{ env.PROJECT_ID }}")
+          --project="${{ vars.PROJECT_ID }}")
         echo "SECRET_VALUE=${SECRET_VALUE}" >> $GITHUB_ENV
