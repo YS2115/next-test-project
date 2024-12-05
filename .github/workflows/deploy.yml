@@ -1,0 +1,29 @@
+name: Get Secret
+on:
+  push:
+    branches:
+    - 'main'
+
+jobs:
+  get_secret:
+    name: Get Secret from Secret Manager
+    runs-on: ubuntu-latest
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - uses: 'actions/checkout@v4'
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        project_id: 'test-direct-workload-identity'
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: 'Get Secret'
+      run: gcloud secrets versions access latest --secret="my-secret" # シークレットを読み取り。
