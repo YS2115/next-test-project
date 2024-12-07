@@ -39,5 +39,30 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/infrasructure/*
-/infrastructure/**
+ ローカルのTerraform実行ファイル
+.terraform/
+
+# ステートファイル
+terraform.tfstate
+terraform.tfstate.*
+
+# 変数の値を含むファイル（機密情報を含む可能性あり）
+*.tfvars
+*.tfvars.json
+
+# CLI設定ファイル
+.terraformrc
+terraform.rc
+
+# シェルスクリプトなどの補助ファイル
+*.sh
+
+# クラッシュログ
+crash.log
+crash.*.log
+
+# 排除する拡張子
+*.tfplan
+*.backup
+
+.terraform.lock.hcl
