@@ -17,14 +17,6 @@ provider "google" {
   region  = var.region
 }
 
-# Artifact Registry Repository
-resource "google_artifact_registry_repository" "nextjs_repo" {
-  location      = var.region
-  repository_id = "nextjs-app"
-  description   = "Docker repository for Next.js application"
-  format        = "DOCKER"
-}
-
 # Cloud Run service
 resource "google_cloud_run_service" "nextjs_app" {
   name     = "nextjs-app"
@@ -53,11 +45,6 @@ resource "google_cloud_run_service" "nextjs_app" {
     percent         = 100
     latest_revision = true
   }
-
-  # Add explicit dependency on the Artifact Registry repository
-  depends_on = [
-    google_artifact_registry_repository.nextjs_repo
-  ]
 }
 
 # IAM policy to make the service public
